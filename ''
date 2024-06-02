@@ -1,0 +1,29 @@
+
+let file = ".flogs"
+
+let () = 
+ let arg_array = Array.of_list (List.tl (Array.to_list Sys.argv)) in
+ let ic = open_in file in 
+  try
+    while true do
+      let line = input_line ic in 
+      let inner_file = line in 
+      let ic_ic = open_in inner_file in 
+      try
+        while true do
+          let inner_line = input_line ic_ic in 
+          for i =0 to Array.length arg_array - 1 do 
+              if String.contains inner_line arg_array.(i).[0] then 
+                Printf.printf "found in File %d , Name : %s\n" (i+1) inner_file; 
+            done
+                
+        done
+    with End_of_file ->
+        close_in ic_ic
+    done
+  with
+  | End_of_file ->
+      close_in ic
+  | e ->
+      close_in_noerr ic;
+      raise e

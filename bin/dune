@@ -1,0 +1,4 @@
+(executable
+ (public_name logfind_ocaml)
+ (name main)
+ (libraries logfind_ocaml))
